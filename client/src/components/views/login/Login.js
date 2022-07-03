@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { appActions } from "../../../redux/actions/app";
 import { userActions } from "../../../redux/actions/users";
 import { userService } from "../../../shared/api/UserApi";
 import UsuPassFragment from "../../common/UsuPassFragment";
@@ -23,7 +24,7 @@ const Login = () => {
   const [formLogin, setFormLogin] = useState(FORM_INITIAL_STATE);
 
   // Hook llamada a la API
-  //const loginAPI = useApi("/api/login", "", {}, false);
+  //const loginAPI = useApi(API_URL + "/login", "", {}, false);
 
   // Control de navegación
   const navigation = useNavigate();
@@ -69,15 +70,19 @@ const Login = () => {
       .logUser(formLogin)
       //.then((json) => console.log('Login::formSubmit::userService.logUser::json', json));
       .then((json) => {
+        let event = { action: 'Login', status: null, message: '' };
         if (json.error != null) {
+          event = {...event, status: 'ko', message: json.error};
           // console.log("Error al logar al usuario! ", json.error);
         } else {
-          // console.log("Iniciada sesión de usuario correctamente! ", json);
+          event = {...event, status: 'ok', message: "Sesión de usuario iniciada correctamente!"};
+          // console.log(event.message, json);
           // Guardamos los datos de usuario en el Local Storage para tenerlos disponibles
           localStorage.setItem("user", JSON.stringify(json));
           setAppUser(json);
           dispatch(userActions.doLogin(json));
         }
+        dispatch(appActions.traceEvent(event));
       });
   };
 

@@ -2,7 +2,7 @@
 // API para operaciones de notas
 // ------------------------------
 
-const NOTES_API_BASE_PATH = "/api/notes";
+const NOTES_API_BASE_PATH = API_URL + "/notes";
 
 // OPERACIÓN: Obtención del listado de notas
 // ------------------------------------------

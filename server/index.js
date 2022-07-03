@@ -17,6 +17,7 @@ const SALT_ROUNDS_TO_ENCRYPT = 5;
 const USER_ID_LENGTH = 8;
 const NOTE_ID_LENGTH = 8;
 const TOKEN_LENGTH = 24;
+const API_URL = process.env.API_URL || '/api';
 const API_TOKEN_HEADER = "api-token";
 
 // Cargamos la base de datos (lowdb)
@@ -79,7 +80,7 @@ const checkAuthentication = (request, reply, done) => {
  * Devuelve un simple OK. Se puede utilizar para comprobar si el servidor
  * funciona.
  */
-fastify.get("/api", async () => {
+fastify.get(API_URL, async () => {
   return { status: "ok" };
 });
 
@@ -90,7 +91,7 @@ fastify.get("/api", async () => {
  * Registra un nuevo usuario en el sistema. Recibe los parámetros por
  * el cuerpo del mensaje
  */
-fastify.post("/api/register", (request, reply) => {
+fastify.post(API_URL + "/register", (request, reply) => {
   const { username, password } = request.body;
 
   const userExists = db.get("users").find({ username }).value();
@@ -133,8 +134,10 @@ fastify.post("/api/register", (request, reply) => {
  *
  * Inicia sesión devolviendo el token para las peticiones
  */
-fastify.post("/api/login", (request, reply) => {
+fastify.post(API_URL + "/login", (request, reply) => {
   const { username, password } = request.body;
+
+  //console.log("API_URL:", API_URL ? API_URL : 'No sé dónde está API_URL');
 
   const user = db.get("users").find({ username }).value();
 
@@ -174,7 +177,7 @@ fastify.post("/api/login", (request, reply) => {
  */
 fastify.route({
   method: "GET",
-  path: "/api/notes",
+  path: API_URL + "/notes",
   preHandler: checkAuthentication,
   handler: (request, reply) => {
     // Obtenemos el usuario
@@ -193,7 +196,7 @@ fastify.route({
  */
 fastify.route({
   method: "GET",
-  path: "/api/notes/:id",
+  path: API_URL + "/notes/:id",
   preHandler: checkAuthentication,
   handler: (request, reply) => {
     // Obtenemos el usuario
@@ -225,7 +228,7 @@ fastify.route({
  */
 fastify.route({
   method: "POST",
-  path: "/api/notes",
+  path: API_URL + "/notes",
   preHandler: checkAuthentication,
   handler: (request, reply) => {
     // Obtenemos el usuario
@@ -259,7 +262,7 @@ fastify.route({
  */
 fastify.route({
   method: ["PATCH", "PUT"],
-  path: "/api/notes/:id",
+  path: API_URL + "/notes/:id",
   preHandler: checkAuthentication,
   handler: (request, reply) => {
     // Obtenemos el usuario
@@ -300,7 +303,7 @@ fastify.route({
  */
 fastify.route({
   method: "DELETE",
-  path: "/api/notes/:id",
+  path: API_URL + "/notes/:id",
   preHandler: checkAuthentication,
   handler: (request, reply) => {
     // Obtenemos el usuario

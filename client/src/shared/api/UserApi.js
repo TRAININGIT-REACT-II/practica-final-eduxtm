@@ -5,7 +5,7 @@
 
 // Registro de usuario
 // ------------------------------
-const CREATE_USER_API_PATH = "/api/register";
+const CREATE_USER_API_PATH = API_URL + "/register";
 const createUserRequest = (userData) => ({
   method: "POST",
   headers: {
@@ -35,7 +35,7 @@ const registerUser = async (userData) => {
 
 // Login de usuario
 // ------------------------------
-const LOG_USER_API_PATH = "/api/login";
+const LOG_USER_API_PATH = API_URL + "/login";
 const logUserRequestParams = (loginData) => ({
   method: "POST",
   headers: {

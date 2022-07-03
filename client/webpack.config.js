@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { DefinePlugin } = require("webpack");
 const { resolve } = require("path");
 
 /**
@@ -46,6 +47,9 @@ module.exports = {
       template: "./template/index.html",
       favicon: "./static/favicon.ico",
       filename: "index.html",
+    }),
+    new DefinePlugin({
+        API_URL: JSON.stringify('/api')
     }),
   ],
   // Por ahora, incluimos siempre los source maps para que las herramientas

@@ -19,7 +19,7 @@ const CreateAccount = () => {
   const [accountForm, setAccountForm] = useState(FORM_INITIAL_STATE);
 
   // Hook llamada a la API
-  //const registerUserAPI = useApi("/api/register", "", {}, false);
+  //const registerUserAPI = useApi(API_URL + "/register", "", {}, false);
 
   // Dispatcher de acciones Redux, para el store disponible
   const dispatch = useDispatch();
