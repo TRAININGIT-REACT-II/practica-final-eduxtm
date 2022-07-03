@@ -1,28 +1,39 @@
-import { useEffect, useState } from "react";
-import Status from "./components/Status";
+import { useContext, useEffect } from "react";
+import { Provider } from "react-redux";
+import ErrorBoundary from "./components/common/ErrorBoundary";
+import AppRoutesProvider from "./components/views/AppRoutesProvider";
+import AppProps from "./shared/contexts/AppProps";
+
+import store from "./redux/store";
+
+// Bootstrap CSS
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Componente principal de la aplicación.
 const App = () => {
-  const [status, setStatus] = useState(false);
-  const [loading, setLoading] = useState(true);
+  
+  // Contexto de configs/props de la aplicación
+  const appProps = useContext(AppProps);
 
-  // Cargamos el estado del servidor
   useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setStatus(data.status === "ok"))
-      .finally(() => setLoading(false));
+    // Inicializa los valores del contexto de la aplicación
+    initAppPropsValues();
   }, []);
+
+  /**
+   * Función de inicialización de valores del contexto de la app
+   */
+  function initAppPropsValues() {
+    appProps.appName = "TrainingNotes";
+  }
 
   // Mostramos la aplicación
   return (
-    <main>
-      <h1>Curso de React de TrainingIT</h1>
-      <p>
-        Estado del servidor:
-        {loading ? " Cargando..." : <Status status={status} />}
-      </p>
-    </main>
+    <Provider store={store}>
+      <ErrorBoundary message="Ha ocurrido un error en la aplicación">
+        <AppRoutesProvider />
+      </ErrorBoundary>
+    </Provider>
   );
 };
 

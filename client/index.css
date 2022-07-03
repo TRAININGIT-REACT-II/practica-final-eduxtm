@@ -4,5 +4,135 @@
 }
 
 body {
-  font-family: sans-serif;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+.theme-dark {
+  background-color: #212529;
+}
+
+.theme-light {
+  background-color: #f8f9fa;
+}
+
+.dark-mode {
+  background-color: black;
+}
+
+.dark-mode h1 {
+  color: white;
+}
+
+/** =======================*/
+/** INIT - WIDGET */
+/** =======================*/
+.header-widget {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-left: -12px;
+}
+
+.header-widget.light {
+  background: #000;
+  border-color: #000;
+}
+
+.header-widget.dark {
+  background: #fff;
+  border-color: #fff;
+}
+/** END - WIDGET */
+
+/** =======================*/
+/** INIT - NOTAS */
+/** =======================*/
+.note {
+  background-color: #fef68a;
+  border-radius: 10px;
+  padding: 1rem;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  white-space: pre-wrap;
+}
+
+.note-title {
+  background-color: #fff;
+}
+
+.note-footer {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.note.new {
+  background-color: #67d7cc;
+}
+
+.note-title input {
+  display: flex;
+  justify-content: left;
+  width: 99%;
+  border: none;
+  resize: none;
+  background-color: #d3d3d3;
+}
+
+.note textarea {
+  border: none;
+  resize: none;
+  background-color: #67d7cc;
+}
+
+.note-footer button {
+  cursor: pointer;
+  background-color: #e1e1e1;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+}
+
+.note-footer button > span {
+  margin-left: 10px;
+}
+/** END - NOTAS */
+
+/** =======================*/
+/** INIT - EVENTOS */
+/** =======================*/
+.event.title.status {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 25px;
+  margin-right: 5px;
+}
+
+.event.title.status.ok {
+  background-color: #007e06;
+}
+
+.event.title.status.ko {
+  background-color: #d80000;
+}
+/** END - EVENTOS */
+
+/** =======================*/
+/** INIT - OTROS */
+/** =======================*/
+.ico.clickable {
+  cursor: pointer;
+}
+
+.ico-horizontal {
+  margin-right: 5px;
+}
+/** END - OTROS */

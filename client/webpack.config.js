@@ -8,7 +8,7 @@ module.exports = {
   // Para simplificar, asignamos el contexto a la carpeta actual
   context: resolve(__dirname),
   // Punto de entrada de la aplicación
-  entry: "./index.js",
+  entry: resolve(__dirname, "./index.js"),
   output: {
     // Guardamos la aplicación en esta carpeta. En este caso, el path
     // tiene que ser absoluto
@@ -17,6 +17,9 @@ module.exports = {
     // Si no se fuerza este comportamiento, al utilizar react-router y definir rutas,
     // webpack utilizara URLs relativas como /mi-ruta/main.js causando errores.
     publicPath: "/",
+    // Permite cachear en el navegador los recursos, sin que perdamos capacidad de recarga cuando estos cambien
+    filename: "[name].[contenthash].js",
+    chunkFilename: "[name].[contenthash].js",
   },
   module: {
     // Definimos los distintos modulos de transpilacion disponibles

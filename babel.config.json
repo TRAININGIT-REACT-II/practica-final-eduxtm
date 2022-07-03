@@ -8,6 +8,12 @@
     ],
     "@babel/preset-env"
   ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime"
+    ],
+    "macros"
+  ],
   "env": {
     "test": {
       "presets": [

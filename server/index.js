@@ -237,6 +237,8 @@ fastify.route({
       title,
       content,
       id: nanoid(NOTE_ID_LENGTH),
+      creationDate: Date.now(),
+      lastEditionDate: null
     };
 
     db.get("notes").push(newPost).write();
@@ -274,7 +276,7 @@ fastify.route({
       // Actualizamos
       db.get("notes")
         .find({ author: userId, id })
-        .assign({ title, content })
+        .assign({ title, content, lastEditionDate: Date.now() })
         .write();
 
       return {
